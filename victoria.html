@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail: Benteng Victoria</title> 
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* 2. Fleksibilitas Scrolling dan Layout */
+        body { 
+            font-family: Arial, sans-serif; 
+            padding-top: 20px;
+            padding-bottom: 50px; 
+            min-height: 100vh; /* Memastikan layar penuh */
+            background-color: #f8f9fa;
+            overflow-y: scroll; /* Mengaktifkan scrolling vertikal */
+        }
+        
+        .detail-container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* 3. Keseragaman Ukuran Gambar */
+        .poi-image { 
+            width: 100%; /* Lebar gambar mengisi container */
+            max-height: 450px; /* Tinggi maksimum gambar */
+            object-fit: cover; /* **PENTING:** Memastikan gambar terpotong rapi tanpa distorsi */
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+        }
+        
+        /* Gaya umum konten */
+        h1, h3 { color: #004d40; }
+        
+        /* Gaya Fakta Unik */
+        .unique-fact { 
+            background-color: #fff3e0; 
+            border-left: 5px solid #ffb300; 
+            padding: 15px; 
+            margin: 20px 0; 
+        }
+
+        /* 1. Gaya Tombol Kembali (Posisi Bawah) */
+        .back-to-map-btn {
+            padding: 12px 25px;
+            background-color: #004d40;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            display: inline-block; /* Agar tombol memiliki dimensi yang jelas */
+        }
+        
+        .back-to-map-btn:hover {
+            background-color: #00796b;
+        }
+        hr { border-top: 1px solid #eee; margin: 25px 0; }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        
+        <h1 id="poi-title">Benteng Victoria</h1> 
+        <p class="historical-name">(Nieuw Victoria)</p>
+
+        <img src="assets/foto-victoria.jpg" alt="Foto Benteng Victoria" class="poi-image">
+
+        <hr>
+
+        <h3>📚 Ensiklopedia Singkat</h3>
+        <p>Benteng Victoria adalah saksi bisu tiga era kolonial: Portugis, Belanda, dan Jepang. Bangunan aslinya, yang dikenal sebagai Nossa Senhora da Anunciada, mengalami renovasi besar-besaran oleh Belanda dan diberi nama Nieuw Victoria. Saat ini, benteng ini berfungsi sebagai Markas Komando Militer setempat dan menyimpan berbagai meriam kuno serta koleksi benda bersejarah yang menceritakan perlawanan rakyat Maluku terhadap penjajahan.</p>
+        
+        <hr>
+
+        <h3>✨ Fakta Unik</h3>
+        <div class="unique-fact">
+            Benteng ini memiliki bunker dan lorong bawah tanah yang digunakan sebagai ruang penyimpanan senjata dan perlindungan saat perang.
+        </div>
+        
+        <hr>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="back-to-map-btn">← Kembali ke Peta</a>
+        </div>
+
+    </div>
+</body>
+</html>

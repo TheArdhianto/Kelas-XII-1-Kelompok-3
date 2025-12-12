@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambon Manise Explorer - Heritage Map</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div id="logo-kiri" class="logo-box">
+            <img src="assets/logo-sekolah.png" alt="Logo Sekolah">
+        </div>
+
+        <div class="header-center">
+            <h1>Ambon Manise Explorer</h1>
+            <p>Jelajahi Warisan Sejarah Kota Ambon</p> 
+        </div>
+
+        <div id="logo-kanan" class="logo-box">
+            <img src="assets/logo-ambon.png" alt="Logo Kota Ambon">
+        </div>
+    </header>
+
+    <div id="main-container">
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Cari Tokoh Historis atau Lokasi POI...">
+        <button id="clear-search-btn" style="display: none;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div id="map"></div>
+    
+    
+    <div id="category-buttons-container">
+        <button class="category-btn active" data-category="Semua">Semua</button> 
+        
+        <button class="category-btn" data-category="Sejarah">Situs Sejarah</button>
+        <button class="category-btn" data-category="Kota">Kota Ambon</button>
+        <button class="category-btn" data-category="Kuliner">Kuliner Khas</button>
+        <button class="category-btn" data-category="SeniMusik">Pusat Seni & Musik</button>
+    </div>
+        
+        <button id="toggle-heritage-mode" class="heritage-simple-btn">Heritage: ON</button>
+
+        <div id="ornament-left" class="ornament-container">
+            <img src="assets/foto1.jpeg" alt="Foto Ambon 1" class="ornament-photo">
+            <img src="assets/foto2.png" alt="Foto Ambon 2" class="ornament-photo">
+        </div>
+        <div id="ornament-right" class="ornament-container">
+            <img src="assets/foto3.jpeg" alt="Foto Ambon 3" class="ornament-photo">
+            <img src="assets/foto4.png" alt="Foto Ambon 4" class="ornament-photo">
+        </div>
+        
+
+    </div> 
+
+    <aside id="sidebar">
+        <h2 id="sidebar-title">Informasi Detail</h2>
+        <div id="sidebar-content">Pilih POI pada peta untuk melihat detailnya.</div>
+        <button id="close-sidebar">Tutup</button>
+    </aside>
+
+    <section id="historical-figures-section">
+        <div class="section-header">
+            <h2>Tokoh Historis Ambon</h2>
+            <p>Mengenal lebih dekat pahlawan dan tokoh berpengaruh dari Maluku.</p>
+        </div>
+        
+        <div id="figures-grid-container" class="figures-grid">
+            </div>
+    </section>
+
+    
+
+    <section id="team-section">
+    <div class="section-header">
+        <h2>Tim Pengembang</h2> 
+        <p>Proyek Ambon Manise Explorer dikembangkan dengan semangat kolaborasi.</p>
+    </div>
+    
+    <div id="team-grid" class="team-grid-container">
+        <div class="team-member-card">
+            <h3>Dony</h3>
+            <p class="team-role">Team Leader</p>
+            <a href="https://instagram.com/agustinus_aryy" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @agustinus_aryy
+
+            </a>
+        </div>
+        
+        <div class="team-member-card">
+            <h3>Nanggolo</h3>
+            <p class="team-role">Researcher</p>
+            <a href="https://instagram.com/nanggoloyudha_" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @nanggoloyudha_
+            </a>
+        </div>
+        
+        <div class="team-member-card">
+            <h3>Banyoe</h3>
+            <p class="team-role">Content Writer</p>
+            <a href="https://instagram.com/arhansya__" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @arhansya__
+
+            </a>
+        </div>
+        
+        <div class="team-member-card">
+            <h3>Gavin</h3>
+            <p class="team-role">Visual Desainer</p>
+            <a href="https://instagram.com/gapinnar" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @gapinnar
+            </a>
+        </div>
+        
+        <div class="team-member-card">
+            <h3>Tio</h3>
+            <p class="team-role">Programmer</p>
+            <a href="https://instagram.com/satireyo_" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @satireyo_
+            </a>
+        </div>
+    </div>
+    </section>
+
+    <footer class="main-footer">
+    <p>&copy; 2025 Ambon Manise Explorer. KOKURIKULER SMA Negeri 5 Taruna Brawijaya Jawa Timur.</p>
+    <p>Hubungi Kami: <a href="mailto:agustinusary82@gmail.com">agustinusary82@gmail.com</a></p>
+    </footer>
+
+    <div id="figure-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-figure-modal">&times;</span>
+            <img id="modal-figure-image" src="" alt="Tokoh">
+            <h3 id="modal-figure-name"></h3>
+            <p id="modal-figure-short-bio"></p>
+            <a href="#" id="modal-read-more-btn" class="read-more-btn">Baca Biografi Lengkap →</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    
+    <script src="script.js"></script> 
+</body>
+</html>

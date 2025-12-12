@@ -1,0 +1,631 @@
+/* Tepat di awal style.css */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x:hidden;
+}
+
+/* --- 1. Header dan Logo --- */
+header {
+    background-color: #004d40;
+    color: white;
+    height: 80px; 
+    padding: 0 20px;
+    position: relative;
+    z-index: 2000;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-box {
+    width: 60px; height: 60px; padding: 5px;
+    background-color: transparent; 
+}
+
+.logo-box img { max-width: 100%; max-height: 100%; }
+
+.header-center {
+    flex-grow: 1; 
+    text-align: center; /* Konten header di tengah */
+    margin: 0 20px; 
+}
+
+/* --- 2. Container Utama (Implementasi Border Tebal) --- */
+#main-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 35px; /* Ini menciptakan bingkai (border) tebal */
+    background-color: #e3f2fd; /* Warna Bingkai (Biru Muda) */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- 3. Peta (Memastikan Peta Muncul) --- */
+#map {
+    height: 70vh;
+    min-height: 500px;
+    width: 100%;
+    border: 5px solid #004d40; 
+    border-radius: 8px;
+    transition: filter 0.5s ease;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+/* --- Heritage Mode Visuals --- */
+body.heritage-active #map {
+    filter: sepia(0.8) hue-rotate(20deg) brightness(0.9);
+}
+
+
+/* --- 4. Tombol Kategori (Tengah Atas Peta) --- */
+
+/* BARU: Gaya untuk Container Pencarian (di atas peta) */
+#search-container {
+    position: absolute;
+    top: 0px; /* Jarak dari atas main-container */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; 
+    max-width: 400px; 
+    z-index: 2500;
+    
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #004d40;
+    border-radius: 25px;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#search-input:focus {
+    border-color: #ffb300;
+}
+
+/* BARU: Gaya Tombol Clear Search (X) */
+#clear-search-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* Jarak dari sisi kanan input */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: color 0.2s;
+}
+
+#clear-search-btn:hover {
+    color: #d32f2f; /* Merah gelap saat hover */
+}
+
+#category-buttons-container {
+    position: absolute;
+    top: 50px; 
+    left: 50%; 
+    transform: translateX(-50%); /* Sentering Horizontal */
+    
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 8px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2500;
+    display: flex; 
+    gap: 10px; 
+}
+
+.category-btn {
+    padding: 8px 12px;
+    border: 1px solid #004d40;
+    background-color: transparent;
+    color: #004d40;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-btn.active {
+    background-color: #004d40;
+    color: white;
+}
+
+/* --- 5. Tombol Heritage (Kiri Bawah Peta) --- */
+.heritage-simple-btn {
+    position: absolute;
+    bottom: 31px; 
+    left: 40px; 
+    width: auto; 
+    padding: 10px 15px;
+    background-color: #ffb300; 
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 2500;
+}
+
+/* --- 6. Sidebar Detail POI --- */
+#sidebar {
+    position: absolute;
+    top: 0;
+    right: -350px; 
+    width: 330px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 3000;
+    padding: 20px;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+}
+#sidebar.open { right: 0; }
+#sidebar-content img { max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px; }
+#close-sidebar { display: block; width: 100%; padding: 10px; margin-top: 15px; background-color: #d32f2f; color: white; border: none; cursor: pointer; }
+
+
+/* --- 7. Ornamen Foto --- */
+.ornament-container { position: absolute; z-index: 1800; }
+#ornament-left { top: 120px; left: 46px; display: flex; flex-direction: column; gap: 275px; }
+#ornament-right { top: 30%; right: 40px; display: flex; flex-direction: column; gap: 180px; }
+.ornament-photo {
+    width: 80px; height: 80px; object-fit: cover;
+    border: 6px solid white; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    border-radius: 4px; transform: rotate(3deg);
+}
+
+/* Pastikan styling ini ada di style.css dan tidak ada display: none; */
+.btn-detail {
+    display: block; /* atau inline-block */
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #004d40; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    /* ... (gaya lainnya) ... */
+}
+
+/* Gaya Khusus untuk Halaman Detail */
+#detail-view h2 {
+    color: #004d40;
+    margin-bottom: 5px;
+}
+
+.historical-name-tag {
+    font-style: italic;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.detail-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.encyclopedia-text {
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.unique-fact-text {
+    background-color: #fff3e0; /* Warna kuning muda */
+    border-left: 5px solid #ffb300;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+/* ========================================= */
+/* --- TOKOH HISTORIS AMBON SECTION --- */
+/* ========================================= */
+
+#historical-figures-section {
+    padding: 60px 20px;
+    /* Background Gradient Ungu Terang Sesuai Permintaan */
+    background: linear-gradient(145deg, #f0f8ff, #e6e6fa); 
+    margin-top: 50px; /* Jarak dari konten di atasnya */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #4a235a;
+}
+
+.section-header h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #7b68ee; 
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* --- TATA LETAK BINGKAI (Flexbox untuk Sentering) --- */
+.figures-grid {
+    /* GANTI: dari grid menjadi flex */
+    display: flex; 
+    /* Tambahkan wrap agar kartu turun ke baris baru */
+    flex-wrap: wrap; 
+    
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    /* SOLUSI UTAMA: Sentering semua item di baris manapun */
+    justify-content: center;
+}
+
+/* --- GAYA BINGKAI TOKOH (Tambahan Flexbox) --- */
+.figure-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+    
+    /* SOLUSI UTAMA: Menggantikan minmax(200px, 1fr) */
+    flex-basis: 200px; /* Lebar minimum 200px */
+    flex-grow: 1;      /* Memungkinkan kartu melebar jika ada ruang */
+    max-width: 200px;  /* Menjaga agar kartu tidak terlalu lebar */
+}
+
+.figure-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.figure-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 3px solid #7b68ee;
+}
+
+.figure-card h3 {
+    font-size: 1.1em;
+    color: #4a235a;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+
+/* ========================================= */
+/* --- GAYA POP-UP (MODAL) --- */
+/* ========================================= */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 5000; /* Z-index sangat tinggi agar pasti di atas semua elemen */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; 
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+#modal-figure-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #7b68ee;
+}
+
+/* Styling tombol Baca Biografi Lengkap */
+.read-more-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #7b68ee;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.read-more-btn:hover {
+    background-color: #6a5acd;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+} 
+
+/* ========================================= */
+/* --- MEDIA QUERIES (RESPONSIVITAS) --- */
+/* ========================================= */
+
+@media (max-width: 992px) {
+    /* 1. Ornamen Foto: Sembunyikan ornamen yang memakan tempat */
+    #ornament-left, #ornament-right {
+        display: none;
+    }
+
+    /* 2. Container Utama: Kurangi padding bingkai agar konten lebih lebar */
+    #main-container {
+        width: 100%;
+        max-width: none;
+        margin: 10px 0;
+        padding: 15px; /* Bingkai lebih tipis */
+        border-radius: 0; /* Hilangkan border radius di layar penuh */
+    }
+
+    /* 3. Sidebar: Lebarkan di tablet agar konten mudah dibaca */
+    #sidebar {
+        width: 300px;
+    }
+
+    /* 4. Grid Tokoh: Buat tata letak lebih fleksibel */
+    .figures-grid {
+        gap: 20px;
+    }
+    
+    .figure-card {
+        /* Memungkinkan 2 kolom per baris di tablet */
+        flex-basis: calc(50% - 15px); 
+        max-width: calc(50% - 15px);
+    }
+}
+
+/* style.css */
+
+@media (max-width: 600px) {
+    /* 1. Header: Header menjadi lebih ringkas */
+    header {
+        height: 60px;
+        padding: 5px 10px;
+        flex-direction: row; /* Tumpuk logo dan teks */
+        text-align: center;
+        justify-content: center;
+    }
+    .logo-box {
+        display: none; /* Sembunyikan logo untuk menghemat ruang */
+    }
+    .header-center {
+        margin: 0;
+        text-align: center;
+    }
+    .header-center h1 {
+        font-size: 1.3em;
+        margin: 0;
+    }
+    .header-center p {
+        font-size: 0.8em;
+    }
+    
+    /* 2. Peta & Tombol: Tata letak di atas peta */
+    #map {
+        min-height: 400px;
+        margin-top: 5px;
+    }
+    
+    /* Tombol Kategori & Search Bar ditumpuk dan diperluas */
+    #search-container {
+        top: 10px;
+        max-width: 95%;
+    }
+
+    #category-buttons-container {
+        top: 65px; /* Turunkan di bawah search bar */
+        width: 95%; 
+        flex-wrap: wrap; /* Tombol kategori turun ke baris baru */
+        justify-content: center;
+        gap: 5px;
+        padding: 8px;
+    }
+    .category-btn {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+    
+    /* 3. Sidebar: Sidebar mengambil seluruh lebar layar */
+    #sidebar {
+        width: 100%;
+        right: -100%; /* Sembunyikan ke sisi kanan layar penuh */
+    }
+    
+    /* 4. Grid Tokoh: Satu kolom penuh di ponsel */
+    .figures-grid {
+        gap: 15px;
+    }
+    
+    .figure-card {
+        /* Satu kolom penuh dengan sedikit margin */
+        flex-basis: 100%; 
+        max-width: 100%;
+        padding: 10px;
+    }
+    
+    /* 5. Modal Pop-up: Sesuaikan di ponsel */
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .read-more-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* ========================================= */
+/* --- TEAM SECTION --- */
+/* ========================================= */
+#team-section {
+    padding: 60px 20px;
+    background-color: #f7f7f7; /* Latar belakang abu-abu terang */
+    text-align: center;
+}
+
+/* Menggunakan gaya header yang sama dengan Tokoh Historis */
+#team-section .section-header h2 {
+    color: #004d40; /* Warna hijau tua */
+    border-bottom: 3px solid #ffb300; /* Garis bawah kuning */
+    display: inline-block;
+}
+
+.team-grid-container {
+    display: flex; /* Menggunakan Flexbox untuk kontrol baris */
+    flex-wrap: wrap; 
+    justify-content: center; /* Sentering tim secara horizontal */
+    gap: 30px; /* Jarak antar kartu */
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.team-member-card {
+    /* Perhitungan lebar: (100% / 5 kolom) - (gap) */
+    flex-basis: calc(20% - 24px); 
+    max-width: 200px; 
+    
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-member-card h3 {
+    font-size: 1.2em;
+    color: #004d40;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.team-role {
+    color: #ffb300;
+    font-style: italic;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.social-link {
+    display: block;
+    background-color: #004d40;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.social-link:hover {
+    background-color: #ffb300;
+    color: #333;
+}
+
+/* ========================================= */
+/* --- FOOTER MINIMALIS (Paling Bawah) --- */
+/* ========================================= */
+
+.main-footer {
+    background-color: #004d40; 
+    color: #e3f2fd; 
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    border-top: 5px solid #ffb300; 
+}
+
+.main-footer p {
+    margin: 5px 0;
+}
+
+.main-footer a {
+    color: #ffb300; 
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.2s;
+}
+
+.main-footer a:hover {
+    color: white;
+}
+
+/* ========================================= */
+/* --- MEDIA QUERIES UNTUK TEAM SECTION --- */
+/* ========================================= */
+
+/* Tablet (992px ke bawah): 3 kolom */
+@media (max-width: 992px) {
+    .team-member-card {
+        /* (100% / 3 kolom) - (gap) */
+        flex-basis: calc(33.333% - 20px); 
+    }
+}
+
+/* Ponsel (600px ke bawah): 2 kolom */
+@media (max-width: 600px) {
+    .team-grid-container {
+        gap: 15px;
+    }
+    .team-member-card {
+        /* (100% / 2 kolom) - (gap) */
+        flex-basis: calc(50% - 7.5px); 
+        padding: 15px;
+    }
+    .team-member-card h3 {
+        font-size: 1.1em;
+    }
+    .team-role, .social-link {
+        font-size: 0.9em;
+    }
+}
